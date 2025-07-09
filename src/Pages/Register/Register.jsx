@@ -17,6 +17,13 @@ const Register = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from || '/';
+     const handleImageUpload = async(e) => {
+        console.log("image")
+        const imageData = e.target.files[0];
+        const imageURL = await imagUploadURl(imageData)
+        console.log(imageURL);
+        setProfilePic(imageURL)
+    }
 
     const onSubmit = data => {
         // console.log(data);
@@ -37,7 +44,7 @@ const Register = () => {
                             // update user profile in firebase
                 const userProfile = {
                     displayName: data.name,
-                    photoURL: profilePic
+                    photoURL: profilePic,
                 }
                 updateUserProfile(userProfile)
                     .then(() => {
@@ -54,12 +61,7 @@ const Register = () => {
                 console.error(error);
             })
     }
-    const handleImageUpload = async(e) => {
-        const imageData = e.target.files[0];
-        const imageURL = await imagUploadURl(imageData)
-        // console.log(imageURL);
-        setProfilePic(imageURL)
-    }
+   
     return (
 
         <div className="card bg-base-100 w-full max-w-lg shrink-0 shadow-2xl mx-auto">
@@ -79,11 +81,12 @@ const Register = () => {
                         <label className="label">Your Photo</label>
                         <input type="file"
                             onChange={handleImageUpload}
-                            className="input w-full py-2" placeholder="Your Profile picture" 
-                            {...register("photoURL",{required:true})}/>
-                        {
+                            className="input w-full py-2" placeholder="Your Profile picture" required
+                            // {...register("photoURL",{required:true})}
+                        />
+                        {/* {
                             errors.photoURL?.type === "required" && <p className='text-red-500'>Upload Your Photo</p>
-                        }
+                        } */}
 
                         {/* email field */}
                         <label className="label">Email</label>
@@ -113,7 +116,7 @@ const Register = () => {
                             errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>
                         }
                         {
-                            errors.password?.type === 'pattern' && <p className='text-red-500'>Password must be 6 characters, minimum 1 captial,1 number,1 Small letter  and a special character(@$!%*?&)</p>
+                            errors.password?.type === 'pattern' && <p className='text-red-500'>Password must be 6 characters, minimum 1 capital,1 number,1 Small letter  and a special character(@$!%*?&)</p>
                         }
                                                         {/* select role */}
                         <label className="label">Select Your Role</label>

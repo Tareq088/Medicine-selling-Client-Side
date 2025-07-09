@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
@@ -35,7 +35,6 @@ const Login = () => {
         .catch(error=>{
             Swal.fire(`${error.message}`);
         })
-        
     }
   return (
     <div className="max-w-lg mx-auto shadow-md p-5">
@@ -77,7 +76,7 @@ const Login = () => {
           )}
           {errors.password?.type === "pattern" && (
             <p className="text-red-500">
-              Password must be 6 characters, minimum 1 captial,1 number,1 Small
+              Password must be 6 characters, minimum 1 capital,1 number,1 Small
               letter and a special character(@$!%*?&)
             </p>
           )}
