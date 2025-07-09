@@ -20,7 +20,6 @@ const SocialLogin = () => {
             name:user.displayName,
             role: "user", //default rol
             createdAt: new Date(),
-            lastLogIn: new Date(),
             }
             const userRes = await axiosInstance.post("/users", userInfo);
             console.log("user update info",userRes.data)
