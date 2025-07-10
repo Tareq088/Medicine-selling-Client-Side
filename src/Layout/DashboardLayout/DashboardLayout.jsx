@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import MedionLogo from '../../Components/MedionLogo/MedionLogo';
-import { FaHome, FaUsers, FaTags, FaMoneyCheckAlt, FaHistory } from "react-icons/fa";
+import { FaHome, FaUsers, FaTags, FaMoneyCheckAlt, FaHistory, FaBullhorn } from "react-icons/fa";
 import { MdCategory, MdOutlinePayment, MdOutlineManageAccounts } from "react-icons/md";
 import { GiMedicines } from "react-icons/gi";
 import { HiOutlineClipboardList } from "react-icons/hi";
+import useUserRole from '../../Hooks/useUserRole';
 
 const DashboardLayout = () => {
+    const {role, roleLoading} = useUserRole();
+    // console.log(role)
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                {/* Page content here */}
+                            {/* Page content here */}
                     <div className="drawer-content flex flex-col">
                         {/* Navbar */}
                         <div className="navbar bg-base-300 w-full lg:hidden">
@@ -51,50 +54,73 @@ const DashboardLayout = () => {
                         Home
                         </NavLink>
                     </li>
+                                            {/* admin role */}
+                    {
+                        !roleLoading && role === "admin" && (
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/manageUsers">
+                                    <FaUsers className="inline mr-2" />
+                                    Manage Users
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/manageCategory">
+                                    <MdCategory className="inline mr-2" />
+                                    Manage Category
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/adminPaymentManagement">
+                                    <MdOutlinePayment className="inline mr-2" />
+                                    Admin Payment Management
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/salesReport">
+                                    <HiOutlineClipboardList className="inline mr-2" />
+                                    Sales Report
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/manageBanner">
+                                    <MdOutlineManageAccounts className="inline mr-2" />
+                                    Manage Banner
+                                    </NavLink>
+                                </li>
+                            </>
+                        )
+                    }                  
+                                                        {/* seller role */}
+                    {
+                        !roleLoading && role === "seller" && 
+                        (
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/manageMedicine">
+                                    <GiMedicines className="inline mr-2" />
+                                    Manage Medicine
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/sellerPaymentHistory">
+                                    <FaHistory className="inline mr-2" />
+                                    Seller Payment History
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/askForAdvertisement">
+                                    <FaBullhorn className="inline mr-2" />
+                                    Ask for Advertisement
+                                    </NavLink>
+                                </li>
+                            </>
+                        )
+                    }
+
+                                        {/* user role */}
                     <li>
-                        <NavLink to="/adminPaymentManagement">
-                        <MdOutlinePayment className="inline mr-2" />
-                        Admin Payment Management
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/manageBanner">
-                        <MdOutlineManageAccounts className="inline mr-2" />
-                        Manage Banner
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/manageCategory">
-                        <MdCategory className="inline mr-2" />
-                        Manage Category
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/manageMedicine">
-                        <GiMedicines className="inline mr-2" />
-                        Manage Medicine
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/manageUsers">
-                        <FaUsers className="inline mr-2" />
-                        Manage Users
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/salesReport">
-                        <HiOutlineClipboardList className="inline mr-2" />
-                        Sales Report
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/sellerPaymentHistory">
-                        <FaHistory className="inline mr-2" />
-                        Seller Payment History
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/userPaymentHistory">
+                        <NavLink to="/dashboard/userPaymentHistory">
                         <FaMoneyCheckAlt className="inline mr-2" />
                         User Payment History
                         </NavLink>

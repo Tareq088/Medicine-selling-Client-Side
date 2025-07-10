@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Button from '../../../Components/Button/Button.jsx';
-import errorImage from "../../../assets/errorImage.png"
+
+import errorImage from "../../assets/errorImage.png"
+import Button from './../../Components/Button/Button';
 
 const ErrorPage = () => {
     return (

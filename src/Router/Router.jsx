@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layout/RootLayout/RootLayout";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
-import ErrorPage from "../Pages/Forbidden/ErrorPage/ErrrorPage";
+
 import PrivateRoute from './../Route/PrivateRoute/PrivateRoute';
 import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
 import Home from './../Pages/Home/Home';
@@ -13,6 +13,14 @@ import ManageCategory from './../Pages/Dashboard/ManageCategory/ManageCategory';
 import ManageMedicine from './../Pages/Dashboard/ManageMedicine/ManageMedicine';
 import ManageUsers from './../Pages/Dashboard/ManageUsers/ManageUsers';
 import SellerPaymentHistory from './../Pages/Dashboard/SellerPaymentHistory/SellerPaymentHistory';
+import AskForAdvertisement from "../Pages/Dashboard/AskForAdvertisement/AskForAdvertisement";
+import SalesReport from "../Pages/Dashboard/SalesReport/SalesReport"; // ✅ you had typo
+import UserPaymentHistory from "../Pages/Dashboard/UserPaymentHistory/UserPaymentHistory"; // ✅ correct casing
+
+import AdminRoute from "../Route/AdminRoute/AdminRoute";
+import SellerRoute from "../Route/SellerRoute/SellerRoute";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Forbidden from './../Pages/Forbidden/Forbidden';
 
 export const router = createBrowserRouter([
   {
@@ -20,63 +28,74 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        index:true,
-        Component:Home,
+        index: true,
+        element: <Home />,
       },
       {
         path: "register",
-        Component: Register,
+        element: <Register />,
       },
       {
         path: "login",
-        Component: Login,
+        element: <Login />,
       },
+      {
+        path:"forbidden",
+        element:<Forbidden />
+      }
     ],
   },
   {
-    path:"/dashboard",
-    element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-    children:[
+    path: "/dashboard",
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    children: [
       {
         index: true,
-        element: <DashboardHome></DashboardHome>
+        element: <DashboardHome />
+      },
+                            // admin role
+      {
+        path: "manageUsers",
+        element: <AdminRoute> <ManageUsers /> </AdminRoute> 
       },
       {
-        path:"adminPaymentManagement",
-        element:<AdminPaymentManagement></AdminPaymentManagement>
+        path: "manageCategory",
+        element: <AdminRoute> <ManageCategory /> </AdminRoute>
       },
       {
-        path:"manageBanner",
-        element:<ManageBanner></ManageBanner>
+        path: "adminPaymentManagement",
+        element: <AdminRoute> <AdminPaymentManagement /> </AdminRoute>
       },
       {
-        path:"manageCategory",
-        element:<ManageCategory></ManageCategory>
+        path: "salesReport",
+        element: <AdminRoute> <SalesReport /> </AdminRoute>
       },
       {
-        path:"manageMedicine",
-        element:<ManageMedicine></ManageMedicine>
+        path: "manageBanner",
+        element: <AdminRoute> <ManageBanner /> </AdminRoute>
+      },
+                              // seller role
+      {
+        path: "manageMedicine",
+        element:<SellerRoute> <ManageMedicine /> </SellerRoute> 
       },
       {
-        path:"manageUsers",
-        element:<ManageUsers></ManageUsers>
+        path: "sellerPaymentHistory",
+        element:<SellerRoute> <SellerPaymentHistory /> </SellerRoute> 
       },
       {
-        path:"salesReport",
-        element:<salesReport></salesReport>
+        path: "askForAdvertisement",
+        element:<SellerRoute> <AskForAdvertisement /> </SellerRoute> 
       },
+                                // user role
       {
-        path:"sellerPaymentHistory",
-        element:<SellerPaymentHistory></SellerPaymentHistory>
-      },
-      {
-        path:"userPaymentHistory",
-        element:<userPaymentHistory></userPaymentHistory>
+        path: "userPaymentHistory",
+        element: <UserPaymentHistory />
       }
     ]
   },
   {
-    path:"/*",
-    Component:ErrorPage
+    path: "/*",
+    element: <ErrorPage />
   },
 ]);
