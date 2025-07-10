@@ -29,7 +29,7 @@ const Register = () => {
         // console.log(data);
         createUser(data.email, data.password)
             .then(async (result) => {
-                console.log(result.user);
+                 console.log(result.user);
                 // update userinfo in the database
                 const userInfo = {
                     email: data.email,
@@ -39,7 +39,7 @@ const Register = () => {
                     lastLogIn: new Date(),
                 }
                 const userRes = await axiosInstance.post('/users', userInfo);
-                console.log(userRes.data);
+                // console.log(userRes.data);
                 if(userRes.data.insertedId){
                             // update user profile in firebase
                 const userProfile = {
