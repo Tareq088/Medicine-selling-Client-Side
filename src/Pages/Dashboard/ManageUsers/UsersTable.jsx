@@ -5,7 +5,7 @@ const UsersTable = ({ user,index,refetch}) => {
 //   console.log(user);
                     //  user jodi na thake taile jeno error na ashe tai ||{} dilam
   const {name, email, role, createdAt,_id} = user || {};
-  const[userRole, setUserRole] = useState(null);
+  const[userRole, setUserRole] = useState("");
 //   const {} = useMutation({
 //     mutationFn
 //   })
