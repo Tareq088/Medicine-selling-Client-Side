@@ -73,7 +73,7 @@ const Navbar = () => {
               className="hidden sm:block sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full"
               src={medionLogo}
             ></img>
-            <div className="text-xs md:text-base lg:text-xl text-red-800">
+            <div className="text-xs md:text-base lg:text-xl text-red-800 font-extrabold">
               <Link to="/">Medion</Link>
             </div>
           </div>
