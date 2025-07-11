@@ -35,8 +35,9 @@ const Register = () => {
                     email: data.email,
                     role: data.role,
                     name:data.name,
-                    createdAt: new Date(),
-                    lastLogIn: new Date(),
+                    image:profilePic,
+                    createdAt: new Date().toISOString(),
+                    lastLogIn: new Date().toISOString(),
                 }
                 const userRes = await axiosInstance.post('/users', userInfo);
                 // console.log(userRes.data);

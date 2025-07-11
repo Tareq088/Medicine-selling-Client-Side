@@ -25,6 +25,7 @@ const ManageUsers = () => {
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Profile Picture</th>
                         <th>Email</th>
                         <th>Created At</th>
                         <th>Role</th>
