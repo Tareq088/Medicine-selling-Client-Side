@@ -21,6 +21,9 @@ import AdminRoute from "../Route/AdminRoute/AdminRoute";
 import SellerRoute from "../Route/SellerRoute/SellerRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Forbidden from './../Pages/Forbidden/Forbidden';
+import UserRoute from "../Route/UserRoute/UserRoute";
+import Shop from "../Pages/Shop/Shop";
+import Cart from "../Pages/Cart/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +45,14 @@ export const router = createBrowserRouter([
       {
         path:"forbidden",
         element:<Forbidden />
+      },
+      {
+        path:"shop",
+        element:<Shop/>
+      },
+      {
+        path:"cart",
+        element:<Cart/>
       }
     ],
   },
@@ -90,7 +101,7 @@ export const router = createBrowserRouter([
                                 // user role
       {
         path: "userPaymentHistory",
-        element: <UserPaymentHistory />
+        element: <UserRoute> <UserPaymentHistory /> </UserRoute>
       }
     ]
   },

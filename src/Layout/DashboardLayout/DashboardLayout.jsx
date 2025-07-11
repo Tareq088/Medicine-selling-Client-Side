@@ -119,12 +119,20 @@ const DashboardLayout = () => {
                     }
 
                                         {/* user role */}
-                    <li>
-                        <NavLink to="/dashboard/userPaymentHistory">
-                        <FaMoneyCheckAlt className="inline mr-2" />
-                        User Payment History
-                        </NavLink>
-                    </li>
+                    
+                    {
+                        !roleLoading && role === "user" && (
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/userPaymentHistory">
+                                    <FaMoneyCheckAlt className="inline mr-2" />
+                                    User Payment History
+                                    </NavLink>
+                                </li>
+                            </>
+                        )
+                    }
+                   
                 </ul>
                 
             </div>
