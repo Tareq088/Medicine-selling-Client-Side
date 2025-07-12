@@ -29,7 +29,8 @@ const Shop = () => {
     const cartItem = {
       userEmail: user.email,
       medicineId: medicine._id, // Can be ObjectId or string depending on backend handling
-      medicineName: medicine.itemName
+      medicineName: medicine.itemName,
+      quantity:parseInt(1),
     };
 
     try {

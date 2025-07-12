@@ -1,68 +1,97 @@
-import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import Loading from "../../Components/Loading/Loading";
 
 const Cart = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  const [quantities, setQuantities] = useState({});
-
-                    // Load cart items
+  // 🔁 Load Cart Items
   const { data: cartItems = [], isLoading } = useQuery({
     queryKey: ["cart", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/carts?userEmail=${user?.email}`);
-                    // Default quantity = 1 for each item
-      const qtyMap = {};
-      res.data.forEach(item => {qtyMap[item._id] = 1;});
-      setQuantities(qtyMap);
       return res.data;
     },
     enabled: !!user?.email,
   });
 
+  // 🔼🔽 Update Quantity Mutation
+  const quantityMutation = useMutation({
+    mutationFn: async ({ id, delta }) => {
+      const res = await axiosSecure.patch(`/carts/${id}/quantity?delta=${delta}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      // toast.success("Quantity updated");
+      queryClient.invalidateQueries(["cart", user?.email]);
+    },
+    onError: err => {
+      toast.error(err.response?.data?.message || "Failed to update quantity");
+    }
+  });
+
   const handleQuantityChange = (id, delta) => {
-    setQuantities(prev => {
-      const newQty = Math.max(1, (prev[id] || 1) + delta);
-      return { ...prev, [id]: newQty };
-    });
+    quantityMutation.mutate({ id, delta });
   };
 
-  const removeItem = async (id) => {
-    try {
-      await axiosSecure.delete(`/carts/${id}`);
+  // ❌ Remove Single Item Mutation
+  const removeMutation = useMutation({
+    mutationFn: async (id) => {
+      const res = await axiosSecure.delete(`/carts/${id}`);
+      return res.data;
+    },
+    onSuccess: () => {
       toast.success("Item removed");
       queryClient.invalidateQueries(["cart", user?.email]);
-    } catch (err) {
+    },
+    onError: () => {
       toast.error("Failed to remove item");
-      console.log(err)
     }
+  });
+
+  const handleRemoveItem = (id) => {
+    removeMutation.mutate(id);
   };
 
-  const clearCart = async () => {
-    try {
-      await axiosSecure.delete(`/carts/clear?userEmail=${user?.email}`);
+  // 🧹 Clear All Cart Items
+  const clearMutation = useMutation({
+    mutationFn: async () => {
+      const res = await axiosSecure.delete(`/carts/all/clear?userEmail=${user?.email}`);
+      return res.data;
+    },
+    onSuccess: () => {
       toast.success("Cart cleared");
       queryClient.invalidateQueries(["cart", user?.email]);
-    } catch (err) {
+    },
+    onError: () => {
       toast.error("Failed to clear cart");
-      console.log(err)
     }
+  });
+
+  const handleClearCart = () => {
+    clearMutation.mutate();
   };
+
+  const getTotal = () =>
+    cartItems.reduce((sum, item) => {
+      const { price, discount } = item.medicine;
+      const discounted = price - (price * discount) / 100;
+      return sum + discounted * item.quantity;
+    }, 0).toFixed(2);
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-4 text-center">My Cart</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center text-blue-600">My Cart</h2>
 
       {isLoading ? (
-        <p>Loading...</p>
+        <Loading></Loading>
       ) : cartItems.length === 0 ? (
-        <p>No items in cart.</p>
+        <p className="text-center text-2xl">Your cart is empty.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full">
@@ -70,50 +99,60 @@ const Cart = () => {
               <tr>
                 <th>Sl No.</th>
                 <th>Image</th>
-                <th>Brand</th>
+                <th>Name</th>
                 <th>Generic</th>
                 <th>Unit</th>
-                <th>Price/Unit</th>
+                <th>Price</th>
                 <th>Discount</th>
                 <th>Qty</th>
                 <th>Total</th>
-                <th>Action</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               {cartItems.map((item,index) => {
-                const med = item.medicine;
-                const qty = quantities[item._id] || 1;
-                const price = med.price;
-                const discount = med.discount;
-                const discountedPrice = price - (price * discount) / 100;
-                const total = (discountedPrice * qty).toFixed(2);
+                const { _id, quantity, medicine } = item;
+                const { image, itemName, genericName, unit, price, discount } = medicine;
+                const discounted = price - (price * discount) / 100;
+                const rowTotal = (discounted * quantity).toFixed(2);
 
                 return (
-                  <tr key={item._id}>
+                  <tr key={_id}>
                     <td>{index+1}</td>
                     <td>
-                      <img src={med.image} alt={med.itemName} className="w-12 h-12 rounded" />
+                      <img src={image} alt={itemName} className="w-12 h-12 rounded" />
                     </td>
-                    <td>{med.itemName}</td>
-                    <td>{med.genericName || "N/A"}</td>
-                    <td>{med.unit || "N/A"}</td>
+                    <td>{itemName}</td>
+                    <td>{genericName || "N/A"}</td>
+                    <td>{unit || "N/A"}</td>
                     <td>৳ {price}</td>
                     <td>{discount}%</td>
                     <td>
                       <div className="flex items-center gap-2">
-                        <button onClick={() => handleQuantityChange(item._id, -1)} className="btn btn-sm btn-circle">
+                        <button
+                          onClick={() => handleQuantityChange(_id, -1)}
+                          className="btn btn-sm btn-circle"
+                          disabled={quantityMutation.isPending}
+                        >
                           <FaMinus />
                         </button>
-                        <span>{qty}</span>
-                        <button onClick={() => handleQuantityChange(item._id, 1)} className="btn btn-sm btn-circle">
+                        <span>{quantity}</span>
+                        <button
+                          onClick={() => handleQuantityChange(_id, 1)}
+                          className="btn btn-sm btn-circle"
+                          disabled={quantityMutation.isPending}
+                        >
                           <FaPlus />
                         </button>
                       </div>
                     </td>
-                    <td>৳ {total}</td>
+                    <td>৳ {rowTotal}</td>
                     <td>
-                      <button onClick={() => removeItem(item._id)} className="btn btn-sm btn-error btn-circle">
+                      <button
+                        onClick={() => handleRemoveItem(_id)}
+                        className="btn btn-sm btn-error btn-circle"
+                        disabled={removeMutation.isPending}
+                      >
                         <FaTrash />
                       </button>
                     </td>
@@ -122,8 +161,14 @@ const Cart = () => {
               })}
             </tbody>
           </table>
-          <div className="mt-4 text-right">
-            <button onClick={clearCart} className="btn btn-outline btn-error">
+
+          <div className="flex justify-between items-center mt-4">
+            <p className="text-xl font-semibold">Total: ৳ {getTotal()}</p>
+            <button
+              onClick={handleClearCart}
+              className="btn btn-outline btn-error"
+              disabled={clearMutation.isPending}
+            >
               Clear Cart
             </button>
           </div>
