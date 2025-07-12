@@ -4,11 +4,16 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import Loading from "../../Components/Loading/Loading";
+import { useNavigate } from "react-router";
+const generateTransactionId = () => {
+  return "TXN-" + Date.now().toString().slice(-6) + "-" + Math.floor(Math.random() * 1000);
+};
 
 const Cart = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   // 🔁 Load Cart Items
   const { data: cartItems = [], isLoading } = useQuery({
@@ -19,6 +24,7 @@ const Cart = () => {
     },
     enabled: !!user?.email,
   });
+  console.log
 
   // 🔼🔽 Update Quantity Mutation
   const quantityMutation = useMutation({
@@ -83,6 +89,37 @@ const Cart = () => {
       const discounted = price - (price * discount) / 100;
       return sum + discounted * item.quantity;
     }, 0).toFixed(2);
+
+          //orders data in db
+  const orderMutation = useMutation({
+    mutationFn: async () => {
+      const order = {
+        userEmail: cartItems[0]?.userEmail,
+        items: cartItems.map(item => ({
+          cartId: item._id,
+          medicineId: item.medicine._id,
+          name: item.medicine.itemName,
+          price: item.medicine.price,
+          quantity: item.quantity,
+          discount: item.medicine.discount,
+        })),
+        totalAmount: parseFloat(getTotal()),
+        paymentStatus: "un-paid", // 🔁 always default first
+        transactionId: generateTransactionId(), // ✅ custom function
+        createdAt: new Date(),
+      };
+      const res = await axiosSecure.post("/orders", order);
+      return res.data;
+    },
+    onSuccess: () => {
+      toast.success("Order placed successfully!");
+      handleClearCart();
+      navigate("/myOrders");
+    },
+    onError: () => {
+      toast.error("Failed to place order");
+    }
+  });
 
   return (
     <div className="p-6">
@@ -162,8 +199,21 @@ const Cart = () => {
             </tbody>
           </table>
 
-          <div className="flex justify-between items-center mt-4">
-            <p className="text-xl font-semibold">Total: ৳ {getTotal()}</p>
+         <div className="flex justify-between items-center mt-4 flex-wrap gap-4">
+          <p className="text-xl font-extrabold text-red-700">Total: ৳ {getTotal()}</p>
+
+          <div className="flex gap-3">           
+            <button
+              onClick={() => 
+    
+                orderMutation.mutate()
+                
+              }
+              className="btn btn-primary text-black"
+              disabled={cartItems.length === 0}
+            >
+              Proceed to Checkout
+            </button>
             <button
               onClick={handleClearCart}
               className="btn btn-outline btn-error"
@@ -172,6 +222,8 @@ const Cart = () => {
               Clear Cart
             </button>
           </div>
+        </div>
+
         </div>
       )}
     </div>

@@ -24,6 +24,9 @@ import Forbidden from './../Pages/Forbidden/Forbidden';
 import UserRoute from "../Route/UserRoute/UserRoute";
 import Shop from "../Pages/Shop/Shop";
 import Cart from "../Pages/Cart/Cart";
+import CheckOut from "../Pages/CheckOut/CheckOut";
+import Orders from "../Pages/Orders/myOrders";
+import MyOrders from "../Pages/Orders/myOrders";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +56,11 @@ export const router = createBrowserRouter([
       {
         path:"cart",
         element:<Cart/>
+      },
+    
+      {
+        path:"/checkOut/:orderId",
+        element:<CheckOut></CheckOut>
       }
     ],
   },
@@ -102,6 +110,10 @@ export const router = createBrowserRouter([
       {
         path: "userPaymentHistory",
         element: <UserRoute> <UserPaymentHistory /> </UserRoute>
+      },
+      {
+        path:"myOrders",
+        element:<UserRoute><MyOrders/></UserRoute>
       }
     ]
   },

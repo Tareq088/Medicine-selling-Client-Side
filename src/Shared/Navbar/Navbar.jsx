@@ -9,7 +9,7 @@ import { FaCartShopping } from "react-icons/fa6";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
-  console.log(user)
+  // console.log(user)
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false)
   const navList = (
