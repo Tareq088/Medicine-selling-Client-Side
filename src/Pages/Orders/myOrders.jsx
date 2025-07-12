@@ -40,7 +40,7 @@ const MyOrders = () => {
                 <th>Total Items</th>
                 <th>Total Price</th>
                 <th>Status</th>
-                <th>Transaction ID</th>
+                <th>Track ID</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -62,7 +62,7 @@ const MyOrders = () => {
                       {order.paymentStatus}
                     </span>
                   </td>
-                  <td>{order.transactionId}</td>
+                  <td>{order.trackId}</td>
                   <td>
                     {order.paymentStatus === "un-paid" ? (
                       <button

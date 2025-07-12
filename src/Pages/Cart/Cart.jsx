@@ -5,7 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import Loading from "../../Components/Loading/Loading";
 import { useNavigate } from "react-router";
-const generateTransactionId = () => {
+const generateTrackId = () => {
   return "TXN-" + Date.now().toString().slice(-6) + "-" + Math.floor(Math.random() * 1000);
 };
 
@@ -105,7 +105,7 @@ const Cart = () => {
         })),
         totalAmount: parseFloat(getTotal()),
         paymentStatus: "un-paid", // 🔁 always default first
-        transactionId: generateTransactionId(), // ✅ custom function
+        trackId: generateTrackId(), // ✅ custom function
         createdAt: new Date(),
       };
       const res = await axiosSecure.post("/orders", order);
