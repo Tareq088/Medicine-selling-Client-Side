@@ -72,7 +72,7 @@ const MyOrders = () => {
                         Pay Now
                       </button>
                     ) : (
-                      <span className="text-green-600 font-semibold">Paid</span>
+                      <span className="text-green-600 font-semibold">Pending..</span>
                     )}
                   </td>
                 </tr>

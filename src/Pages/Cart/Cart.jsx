@@ -114,7 +114,7 @@ const Cart = () => {
     onSuccess: () => {
       toast.success("Order placed successfully!");
       handleClearCart();
-      navigate("/myOrders");
+      navigate("/dashboard/myOrders");
     },
     onError: () => {
       toast.error("Failed to place order");

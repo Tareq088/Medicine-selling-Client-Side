@@ -101,7 +101,7 @@ const PaymentForm = () => {
                                         confirmButtonText: 'Go to Invoice Page',
                                         }).then( async(result) => {
                                             if (result.isConfirmed) {
-                                                navigate(`/invoice/:${orderId}`);
+                                                navigate(`/invoice/${orderId}`);
                                             }
                                         })
                         }
