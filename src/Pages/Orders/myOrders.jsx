@@ -22,7 +22,7 @@ const MyOrders = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
+      <h2 className="text-4xl font-bold mb-6 flex items-center gap-2 justify-center text-blue-600">
         <MdReceiptLong /> My Orders
       </h2>
 
@@ -72,7 +72,7 @@ const MyOrders = () => {
                         Pay Now
                       </button>
                     ) : (
-                      <span className="text-green-600 font-semibold">Pending..</span>
+                      <span className="text-green-600 font-semibold">Paid</span>
                     )}
                   </td>
                 </tr>

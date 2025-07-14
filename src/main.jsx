@@ -7,6 +7,10 @@ import { router } from './Router/Router.jsx';
 import AuthProvider from './Contexts/AuthProvider.jsx';
 import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider, } from '@tanstack/react-query';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 
 // Create a client
 const queryClient = new QueryClient()

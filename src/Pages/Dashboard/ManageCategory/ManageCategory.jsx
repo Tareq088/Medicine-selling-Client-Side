@@ -155,7 +155,7 @@ const ManageCategory = () => {
                 className="input input-bordered w-full"
               />
 
-              {/* Image upload */}
+                              {/* Image upload */}
               <label className="block font-medium">Category Image {selectedCategory && "(upload new to replace)"}</label>
               <input
                 type="file"
