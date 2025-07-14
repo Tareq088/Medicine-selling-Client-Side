@@ -18,7 +18,7 @@ const ManageUsers = () => {
     if(isLoading || isFetching) return <Loading></Loading>
     return (
         <div>
-            <h1 className='font-bold sm:text-lg md:text-xl lg:text-2xl mt-5 text-blue-800 text-center '>Manage Users</h1>
+            <h1 className='font-bold sm:text-lg md:text-xl lg:text-4xl mt-5 text-blue-800 text-center mb-6'>Manage Users</h1>
             <div className="overflow-x-auto">
                 <table className="table table-xs">
                     <thead>

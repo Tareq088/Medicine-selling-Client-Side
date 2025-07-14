@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaPlus } from "react-icons/fa";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { imagUploadURl } from "../../../API/Utlities";
 import { toast } from "react-toastify";
 import useAuth from "../../../Hooks/useAuth";
+import Loading from "../../../Components/Loading/Loading";
 
 const AddMedicineBtn = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,10 +16,19 @@ const AddMedicineBtn = () => {
   console.log(user)
 
   const {register,handleSubmit,reset,formState: { errors },} = useForm();
-
+  const { data: Allcategory = [], isLoading } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/categories");
+      return res.data;
+    }
+  });
+  
+  const categories = Allcategory.map(item => item.categoryName);
+  console.log(categories)
   // ✅ Hardcoded categories and companies
-const categories = ["Medicine", "Healthcare", "Beauty Care", "Sexual Wellness", "Fitness",
-  "Lab Test","Baby & Mom Care", "Supplement", "Food & Nutrition", "Equipments", "Medical Supplies", "Pet Care", "Others",];
+// const categories = ["Medicine", "Healthcare", "Beauty Care", "Sexual Wellness", "Fitness",
+//   "Lab Test","Baby & Mom Care", "Supplement", "Food & Nutrition", "Equipments", "Medical Supplies", "Pet Care", "Others",];
 
   const companies = [ "Square", "Beximco", "Renata", "Acme", "Opsonin", "Eskayef", "Incepta","others"];
 
@@ -67,6 +77,7 @@ const categories = ["Medicine", "Healthcare", "Beauty Care", "Sexual Wellness", 
       toast.error("Something went wrong.");
     }
   };
+  if(isLoading) return <Loading></Loading>
   return (
     <div className="text-center">
       <button onClick={() => setIsModalOpen(true)} className="btn btn-primary text-black">

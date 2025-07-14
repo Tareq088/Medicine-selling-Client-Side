@@ -73,7 +73,14 @@ const DashboardLayout = () => {
           {/* Sidebar content here */}
           <MedionLogo></MedionLogo>
           <li>
-            <NavLink to="/">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                  : "px-3 py-2"
+              }
+            >
               <FaHome className="inline mr-2" />
               Home
             </NavLink>
@@ -82,31 +89,66 @@ const DashboardLayout = () => {
           {!roleLoading && role === "admin" && (
             <>
               <li>
-                <NavLink to="/dashboard/manageUsers">
+                <NavLink
+                  to="/dashboard/manageUsers"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <FaUsers className="inline mr-2" />
                   Manage Users
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/manageCategory">
+                <NavLink
+                  to="/dashboard/manageCategory"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <MdCategory className="inline mr-2" />
                   Manage Category
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/adminPaymentManagement">
+                <NavLink
+                  to="/dashboard/adminPaymentManagement"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <MdOutlinePayment className="inline mr-2" />
                   Admin Payment Management
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/salesReport">
+                <NavLink
+                  to="/dashboard/salesReport"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <HiOutlineClipboardList className="inline mr-2" />
                   Sales Report
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/manageBanner">
+                <NavLink
+                  to="/dashboard/manageBanner"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <MdOutlineManageAccounts className="inline mr-2" />
                   Manage Banner
                 </NavLink>
@@ -117,19 +159,40 @@ const DashboardLayout = () => {
           {!roleLoading && role === "seller" && (
             <>
               <li>
-                <NavLink to="/dashboard/manageMedicine">
+                <NavLink
+                  to="/dashboard/manageMedicine"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <GiMedicines className="inline mr-2" />
                   Manage Medicine
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/sellerPaymentHistory">
+                <NavLink
+                  to="/dashboard/sellerPaymentHistory"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <FaHistory className="inline mr-2" />
                   Seller Payment History
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/askForAdvertisement">
+                <NavLink
+                  to="/dashboard/askForAdvertisement"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <FaBullhorn className="inline mr-2" />
                   Ask for Advertisement
                 </NavLink>
@@ -142,13 +205,27 @@ const DashboardLayout = () => {
           {!roleLoading && role === "user" && (
             <>
               <li>
-                <NavLink to="/dashboard/userPaymentHistory">
+                <NavLink
+                  to="/dashboard/userPaymentHistory"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <FaMoneyCheckAlt className="inline mr-2" />
                   User Payment History
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/myOrders">
+                <NavLink
+                  to="/dashboard/myOrders"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
                   <MdReceiptLong className="inline mr-2" />
                   My Orders
                 </NavLink>

@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useState, useRef } from "react";
-import html2pdf from "html2pdf.js";
+
+import { useState,} from "react";
+
+import useAxiosSecure from './../../../Hooks/useAxiosSecure';
+import { usePDF } from 'react-to-pdf';
 
 const SalesReport = () => {
   const axiosSecure = useAxiosSecure();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const reportRef = useRef();
+  const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
 
   const { data: sales = [], refetch, isLoading } = useQuery({
     queryKey: ["salesReport", startDate, endDate],
@@ -23,25 +25,9 @@ const SalesReport = () => {
     if (startDate && endDate) refetch();
   };
 
-  const handleDownloadPDF = () => {
-    const element = reportRef.current;
-    console.log(reportRef)
-    if (!element) return;
-
-    const options = {
-      margin: 0.5,
-      filename: "sales-report.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
-    };
-
-    html2pdf().set(options).from(element).save();
-  };
-
   return (
     <div className="p-5">
-      <h2 className="text-2xl font-bold mb-4">Sales Report</h2>
+      <h2 className="text-4xl font-bold mb-4 text-center text-blue-600">Sales Report</h2>
 
       <div className="flex gap-3 mb-5">
         <input
@@ -59,12 +45,11 @@ const SalesReport = () => {
         <button onClick={handleFilter} className="btn btn-primary text-black">
           Filter
         </button>
-        <button onClick={handleDownloadPDF} className="btn btn-secondary text-black">
-          Download PDF
-        </button>
+
+     <button className="btn btn-primary text-black" onClick={() => toPDF()}>Download PDF</button>
       </div>
 
-      <div ref={reportRef} className="overflow-x-auto">
+      <div ref={targetRef} className="overflow-x-auto bg-white p-4" style={{ backgroundColor: '#ffffff', color: '#000000' }}  >
         <table className="table">
           <thead>
             <tr>
