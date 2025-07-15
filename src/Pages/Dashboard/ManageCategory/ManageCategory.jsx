@@ -106,6 +106,7 @@ const ManageCategory = () => {
             <th>#</th>
             <th>Category Name</th>
             <th>Image</th>
+            <th>Medicine Count</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -117,6 +118,7 @@ const ManageCategory = () => {
               <td>
                 <img src={cat.categoryImage} alt={cat.categoryName} className="w-12 h-12 object-cover" />
               </td>
+               <td>{cat.medicineCount || 0}</td>
               <td>
                 <button
                   className="btn btn-sm btn-warning mr-2"

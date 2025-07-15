@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Loading from '../../Components/Loading/Loading';
+import "./slider.css"
 
 const Slider = () => {
   const axiosSecure = useAxiosSecure();
@@ -10,19 +11,19 @@ const Slider = () => {
   const { data: slides = [], isLoading } = useQuery({
     queryKey: ['slider'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/advertisements?status=added');
+      const res = await axiosSecure.get('/advertisements/homePage?status=added');
       return res.data;
     }
   });
-
+  // console.log(slides)
   if (isLoading) return <Loading></Loading>;
 
   return (
-    <div className="max-w-5xl mx-auto py-10">
+    <div className=" mx-auto mt-2 mb-5 shadow-2xl">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
-        pagination={{ clickable: true }}
+        pagination={{ clickable: true,}}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         loop={true}
         spaceBetween={20}

@@ -1,0 +1,12 @@
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: white !important;
+  opacity: 1;
+  margin: 0 4px !important;
+}
+.swiper-pagination-bullet-active {
+
+  background-color: blue !important;
+
+}

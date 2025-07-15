@@ -14,6 +14,7 @@ import {
   MdOutlinePayment,
   MdOutlineManageAccounts,
   MdReceiptLong,
+  MdOutlineCategory,
 } from "react-icons/md";
 import { GiMedicines } from "react-icons/gi";
 import { HiOutlineClipboardList } from "react-icons/hi";
@@ -204,6 +205,19 @@ const DashboardLayout = () => {
 
           {!roleLoading && role === "user" && (
             <>
+              <li>
+                <NavLink
+                  to="/dashboard/categoryDetailsMedicine/:category"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-black bg-primary font-bold px-3 py-2 rounded"
+                      : "px-3 py-2"
+                  }
+                >
+                  <MdOutlineCategory className="inline mr-2" />
+                  Category Details Medicine
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/dashboard/userPaymentHistory"

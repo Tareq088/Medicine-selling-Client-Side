@@ -28,6 +28,7 @@ import CheckOut from "../Pages/CheckOut/CheckOut";
 import Orders from "../Pages/Orders/myOrders";
 import MyOrders from "../Pages/Orders/myOrders";
 import Invoice from "../Pages/Invoice/Invoice";
+import CategoryDetailsMedicine from "../Pages/Dashboard/CategoryDetailsMedicine/CategoryDetailsMedicine";
 
 export const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ export const router = createBrowserRouter([
       {
         path:"myOrders",
         element:<UserRoute><MyOrders/></UserRoute>
+      },
+      {
+        path:"categoryDetailsMedicine/:category",
+        element:<UserRoute><CategoryDetailsMedicine></CategoryDetailsMedicine></UserRoute>
       }
     ]
   },
