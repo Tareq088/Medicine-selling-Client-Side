@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import SocialLogin from "../Register/SocialLogin";
 import Swal from "sweetalert2";
+import { ReTitle } from "re-title";
 
 const Login = () => {
   const { signIn, resetPassword } = useAuth();
@@ -37,7 +38,9 @@ const Login = () => {
         })
     }
   return (
+    
     <div className="max-w-lg mx-auto shadow-md p-5">
+    <ReTitle title="Medion|Login" />
     <h1 className="text-5xl font-bold pb-5">Log Into Account</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset className="fieldset">

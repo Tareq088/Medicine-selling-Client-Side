@@ -5,6 +5,7 @@ import Loading from "../../Components/Loading/Loading";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
+import { ReTitle } from "re-title";
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -22,6 +23,7 @@ const MyOrders = () => {
 
   return (
     <div className="p-6">
+      <ReTitle title="Medion|Payment History"/>
       <h2 className="text-4xl font-bold mb-6 flex items-center gap-2 justify-center text-blue-600">
         <MdReceiptLong /> {user.displayName}'s Payment History
       </h2>

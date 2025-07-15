@@ -19,6 +19,7 @@
     "date-fns": "^4.1.0",
     "firebase": "^11.10.0",
     "framer-motion": "^12.23.6",
+    "re-title": "^1.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-fast-marquee": "^1.6.5",

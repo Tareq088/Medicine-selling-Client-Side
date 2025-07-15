@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Loading from "../../../Components/Loading/Loading";
+import { ReTitle } from "re-title";
 
 
 const UserPaymentHistory = () => {
@@ -21,6 +22,7 @@ const UserPaymentHistory = () => {
 
   return (
     <div className="p-4">
+      <ReTitle title="Medion|My Order"/>
       <h2 className="text-4xl font-bold mb-4 text-center text-blue-600">My Order</h2>
 
       <div className="overflow-x-auto">

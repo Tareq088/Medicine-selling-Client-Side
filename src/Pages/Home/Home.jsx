@@ -8,6 +8,7 @@ import ExtraSection2 from './ExtraSection2';
 const Home = () => {
     return (
         <div>
+            
             <Slider></Slider>
             <HomeCategories></HomeCategories>
             <Discount> </Discount>

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../../Components/Loading/Loading";
 import { imagUploadURl } from "../../../API/Utlities";
+import { ReTitle } from "re-title";
 
 
 const ManageCategory = () => {
@@ -88,6 +89,7 @@ const ManageCategory = () => {
 
   return (
     <div className="p-4">
+      <ReTitle title='Medion|Manage Category'/>
       <h2 className="text-4xl font-bold mb-4 text-blue-600 text-center">Manage Categories</h2>
 
       <button

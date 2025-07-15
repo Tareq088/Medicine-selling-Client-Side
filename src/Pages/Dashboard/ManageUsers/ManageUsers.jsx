@@ -3,6 +3,7 @@ import React from 'react';
 import useAxiosSecure from './../../../Hooks/useAxiosSecure';
 import UsersTable from './UsersTable';
 import Loading from '../../../Components/Loading/Loading';
+import { ReTitle } from 're-title';
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -18,6 +19,7 @@ const ManageUsers = () => {
     if(isLoading || isFetching) return <Loading></Loading>
     return (
         <div>
+            <ReTitle title='Medion|Manage USers'/>
             <h1 className='font-bold sm:text-lg md:text-xl lg:text-4xl mt-5 text-blue-800 text-center mb-6'>Manage Users</h1>
             <div className="overflow-x-auto">
                 <table className="table table-xs">

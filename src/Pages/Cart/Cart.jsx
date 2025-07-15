@@ -5,6 +5,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import Loading from "../../Components/Loading/Loading";
 import { useNavigate } from "react-router";
+import { ReTitle } from "re-title";
 const generateTrackId = () => {
   return "TXN-" + Date.now().toString().slice(-6) + "-" + Math.floor(Math.random() * 1000);
 };
@@ -123,6 +124,7 @@ const Cart = () => {
 
   return (
     <div className="p-6">
+      <ReTitle title="Medion|Cart"/>
       <h2 className="text-3xl font-bold mb-4 text-center text-blue-600">My Cart</h2>
 
       {isLoading ? (

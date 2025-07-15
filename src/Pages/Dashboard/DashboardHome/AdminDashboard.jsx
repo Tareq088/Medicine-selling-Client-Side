@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaMoneyBillWave, FaClock, FaCheckCircle } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../../Components/Loading/Loading";
+import { ReTitle } from "re-title";
 
 const AdminDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -20,6 +21,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="p-6">
+       <ReTitle title='Medion|Admin Dashboard'></ReTitle>
       <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">Admin Dashboard - Sales Summary</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

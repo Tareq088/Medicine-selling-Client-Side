@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Switch } from '@headlessui/react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
+import { ReTitle } from 're-title';
 
 
 const ManageBanner = () => {
@@ -38,6 +39,7 @@ const ManageBanner = () => {
 
   return (
     <div className="p-4">
+      <ReTitle title='Medion|Manage Banner'/>
       <h2 className="text-4xl font-bold mb-6 text-blue-600 text-center">Manage Banners</h2>
       <div className="overflow-x-auto">
         <table className="table">

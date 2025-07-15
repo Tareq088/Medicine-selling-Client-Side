@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 import useAxiosSecure from './../../../Hooks/useAxiosSecure';
+import { ReTitle } from "re-title";
 
 
 const AdminPaymentManagement = () => {
@@ -40,6 +41,7 @@ console.log(payments)
 
   return (
     <div className="p-4">
+      <ReTitle title='Medion|Admin Payment Management'/>
       <h2 className="text-4xl font-bold mb-4 text-center text-blue-600">Admin Payment Management</h2>
       <div className="overflow-x-auto">
         <table className="table w-full">

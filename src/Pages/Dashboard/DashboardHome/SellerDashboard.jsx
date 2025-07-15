@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-
-
 import { FaMoneyBillWave, FaCheckCircle, FaClock } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Loading from './../../../Components/Loading/Loading';
+import { ReTitle } from "re-title";
 
 
 const SellerDashboard = () => {
@@ -26,6 +25,7 @@ const SellerDashboard = () => {
 
   return (
     <div className="p-6">
+      <ReTitle title='Medion|Seller Dashboard'></ReTitle>
       <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">Seller Dashboard - Sales Summary</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

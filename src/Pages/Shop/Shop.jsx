@@ -6,6 +6,7 @@ import Loading from "../../Components/Loading/Loading";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
+import { ReTitle } from "re-title";
 
 const Shop = () => {
   const axiosSecure = useAxiosSecure();
@@ -48,6 +49,7 @@ const Shop = () => {
 
   return (
     <div className="p-6">
+      <ReTitle title="Medion|Shop"/>
       <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Available Medicines</h2>
       {isLoading ? (
         <Loading></Loading>

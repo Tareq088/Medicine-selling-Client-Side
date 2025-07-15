@@ -11,6 +11,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { ReTitleProvider } from 're-title';
 
 // Create a client
 const queryClient = new QueryClient()
@@ -19,12 +20,15 @@ const queryClient = new QueryClient()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
       <div className='max-w-11/12 mx-auto'>
+    <ReTitleProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
             <RouterProvider router={router} />
             <ToastContainer/>
         </AuthProvider>
       </QueryClientProvider>
+    </ReTitleProvider>
+      
         
       </div>
   </StrictMode>,

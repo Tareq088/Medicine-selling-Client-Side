@@ -4,6 +4,7 @@ import { useState,} from "react";
 
 import useAxiosSecure from './../../../Hooks/useAxiosSecure';
 import { usePDF } from 'react-to-pdf';
+import { ReTitle } from "re-title";
 
 const SalesReport = () => {
   const axiosSecure = useAxiosSecure();
@@ -27,6 +28,7 @@ const SalesReport = () => {
 
   return (
     <div className="p-5">
+      <ReTitle title='Medion|Sales Report'/>
       <h2 className="text-4xl font-bold mb-4 text-center text-blue-600">Sales Report</h2>
 
       <div className="flex gap-3 mb-5">

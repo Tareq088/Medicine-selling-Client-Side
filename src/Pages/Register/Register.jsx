@@ -7,6 +7,7 @@ import useAuth from '../../Hooks/useAuth';
 import useAxios from '../../Hooks/useAxios';
 import { toast } from 'react-toastify';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import { ReTitle } from 're-title';
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const[profilePic, setProfilePic] = useState(null);
@@ -66,6 +67,7 @@ const Register = () => {
     return (
 
         <div className="card bg-base-100 w-full max-w-lg shrink-0 shadow-2xl mx-auto">
+            <ReTitle title="Medion|Register" />
             <div className="card-body">
                 <h1 className="text-5xl font-bold">Create Account</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>

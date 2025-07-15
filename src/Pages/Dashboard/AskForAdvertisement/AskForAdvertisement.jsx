@@ -6,6 +6,7 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import Loading from "../../../Components/Loading/Loading";
+import { ReTitle } from "re-title";
 
 
 const AskForAdvertisement = () => {
@@ -61,6 +62,7 @@ const AskForAdvertisement = () => {
 
   return (
     <div className="p-4">
+       <ReTitle title='Medion|Ask For Add'></ReTitle>
       <h2 className="text-4xl font-bold mb-4 text-center text-blue-600">Advertisement Requests</h2>
 
       <button
