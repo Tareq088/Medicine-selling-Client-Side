@@ -10,7 +10,7 @@ import { QueryClient, QueryClientProvider, } from '@tanstack/react-query';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
+import 'swiper/css/scrollbar';
 
 // Create a client
 const queryClient = new QueryClient()

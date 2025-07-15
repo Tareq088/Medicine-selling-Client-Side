@@ -25,7 +25,7 @@ const AddMedicineBtn = () => {
   });
   
   const categories = Allcategory.map(item => item.categoryName);
-  console.log(categories)
+  // console.log(categories)
   // ✅ Hardcoded categories and companies
 // const categories = ["Medicine", "Healthcare", "Beauty Care", "Sexual Wellness", "Fitness",
 //   "Lab Test","Baby & Mom Care", "Supplement", "Food & Nutrition", "Equipments", "Medical Supplies", "Pet Care", "Others",];

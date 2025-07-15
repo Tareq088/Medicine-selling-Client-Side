@@ -16,7 +16,7 @@ const HomeCategories = () => {
       return res.data;
     }
   });
-console.log(categories)
+                // console.log(categories)
   if (isLoading) return <Loading></Loading>;
 
   const handleNavigate = (categoryName) => {
@@ -26,7 +26,6 @@ console.log(categories)
   return (
     <div className="px-4">
       <h2 className="text-2xl font-bold mb-6 text-center">Explore Medicine Categories</h2>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {categories.slice(7, 13).map(category => (
           <div
