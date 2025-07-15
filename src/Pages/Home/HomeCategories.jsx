@@ -24,14 +24,14 @@ const HomeCategories = () => {
   };
 
   return (
-    <div className="px-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">Explore Medicine Categories</h2>
+    <div className="px-4 bg-cyan-50 py-5">
+      <h2 className="text-4xl font-extrabold my-10 text-center text-red-700">Explore Medicine Categories</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {categories.slice(7, 13).map(category => (
           <div
             key={category._id}
             onClick={() => handleNavigate(category.categoryName)}
-            className="cursor-pointer rounded-xl shadow-md p-4 bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg "
+            className="cursor-pointer rounded-xl shadow-md p-4 bg-gray-100 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg "
           >
             <img
               src={category.categoryImage}

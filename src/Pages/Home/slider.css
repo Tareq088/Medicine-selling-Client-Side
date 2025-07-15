@@ -4,6 +4,7 @@
   background-color: white !important;
   opacity: 1;
   margin: 0 4px !important;
+  cursor: pointer;
 }
 .swiper-pagination-bullet-active {
 

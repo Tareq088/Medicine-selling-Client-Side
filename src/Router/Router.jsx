@@ -76,9 +76,11 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        // path:"/dashboard/home",
         element: <DashboardHome />
       },
                             // admin role
+
       {
         path: "manageUsers",
         element: <AdminRoute> <ManageUsers /> </AdminRoute> 

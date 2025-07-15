@@ -75,7 +75,7 @@ const DashboardLayout = () => {
           <MedionLogo></MedionLogo>
           <li>
             <NavLink
-              to="/"
+              to="/dashboard/home"
               className={({ isActive }) =>
                 isActive
                   ? "text-black bg-primary font-bold px-3 py-2 rounded"
@@ -83,7 +83,7 @@ const DashboardLayout = () => {
               }
             >
               <FaHome className="inline mr-2" />
-              Home
+                Dashboard Home Page
             </NavLink>
           </li>
           {/* admin role */}
@@ -156,7 +156,7 @@ const DashboardLayout = () => {
               </li>
             </>
           )}
-          {/* seller role */}
+                                        {/* seller role */}
           {!roleLoading && role === "seller" && (
             <>
               <li>
