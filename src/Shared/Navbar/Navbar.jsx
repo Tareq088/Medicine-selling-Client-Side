@@ -6,9 +6,12 @@ import Swal from "sweetalert2";
 import { Tooltip } from "react-tooltip";
 import { FaUserCircle } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
+import useUserRole from "../../Hooks/useUserRole";
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
+  const {role, roleLoading} = useUserRole();
+
   // console.log(user)
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false)
@@ -17,12 +20,18 @@ const Navbar = () => {
       <li className="text-lg">
         <NavLink to="/" className={({ isActive }) =>isActive ? "underline text-green-600" : ""}>Home</NavLink>
       </li>
-      <li className="text-lg">
-        <NavLink to="/shop" className={({ isActive }) =>isActive ? "underline text-green-600" : ""}>Shop</NavLink>
-      </li>
-      <li className="text-lg">
-        <NavLink to="/cart" className={({ isActive }) =>isActive ? "underline text-green-600" : ""}><FaCartShopping/></NavLink>
-      </li>
+      {
+        user && role === "user" && !roleLoading &&
+        <>
+          <li className="text-lg">
+            <NavLink to="/shop" className={({ isActive }) =>isActive ? "underline text-green-600" : ""}>Shop</NavLink>
+          </li>
+          <li className="text-lg">
+            <NavLink to="/cart" className={({ isActive }) =>isActive ? "underline text-green-600" : ""}><FaCartShopping/></NavLink>
+          </li>
+        </>
+      }
+
       <li className="text-lg">
         <NavLink to="/language" className={({ isActive }) =>isActive ? "underline text-green-600" : ""}>Languages</NavLink>
       </li>     

@@ -75,7 +75,8 @@ const DashboardLayout = () => {
           <MedionLogo></MedionLogo>
           <li>
             <NavLink
-              to="/dashboard/home"
+              to="/dashboard"
+              end
               className={({ isActive }) =>
                 isActive
                   ? "text-black bg-primary font-bold px-3 py-2 rounded"
