@@ -21,7 +21,7 @@ const Discount = () => {
 
   return (
     <div className="my-8 px-4 bg-base-200">
-      <h2 className="text-4xl font-extrabold py-4 text-center text-red-700">Discounted Products</h2>
+      <h2 className="sm:text-lg md:text-2xl lg:text-4xl font-extrabold py-4 text-center text-red-700">Discounted Products</h2>
 
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}

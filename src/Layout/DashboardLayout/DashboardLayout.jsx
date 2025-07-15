@@ -202,11 +202,11 @@ const DashboardLayout = () => {
             </>
           )}
 
-          {/* user role */}
+                                        {/* user role */}
 
           {!roleLoading && role === "user" && (
             <>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/dashboard/categoryDetailsMedicine/:category"
                   className={({ isActive }) =>
@@ -218,7 +218,7 @@ const DashboardLayout = () => {
                   <MdOutlineCategory className="inline mr-2" />
                   Category Details Medicine
                 </NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink
                   to="/dashboard/userPaymentHistory"
@@ -229,7 +229,7 @@ const DashboardLayout = () => {
                   }
                 >
                   <FaMoneyCheckAlt className="inline mr-2" />
-                  User Payment History
+                   My Orders
                 </NavLink>
               </li>
               <li>
@@ -242,7 +242,7 @@ const DashboardLayout = () => {
                   }
                 >
                   <MdReceiptLong className="inline mr-2" />
-                  My Orders
+                  User Payment History
                 </NavLink>
               </li>
             </>

@@ -25,7 +25,7 @@ const HomeCategories = () => {
 
   return (
     <div className="px-4 bg-cyan-50 py-5">
-      <h2 className="text-4xl font-extrabold my-10 text-center text-red-700">Explore Medicine Categories</h2>
+      <h2 className="sm:text-lg md:text-2xl lg:text-4xl font-extrabold my-10 text-center text-red-700">Explore Medicine Categories</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {categories.slice(7, 13).map(category => (
           <div

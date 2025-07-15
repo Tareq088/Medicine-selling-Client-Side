@@ -23,7 +23,7 @@ const MyOrders = () => {
   return (
     <div className="p-6">
       <h2 className="text-4xl font-bold mb-6 flex items-center gap-2 justify-center text-blue-600">
-        <MdReceiptLong /> My Orders
+        <MdReceiptLong /> {user.displayName}'s Payment History
       </h2>
 
       {isLoading ? (

@@ -13,7 +13,7 @@ const Loading = () => {
 
       {/* 🚚 Message */}
       <p className="text-lg font-semibold text-gray-600">
-        Loading your parcel data, please wait...
+        Loading your data, please wait...
       </p>
     </div>
   );

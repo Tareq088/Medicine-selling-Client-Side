@@ -32,7 +32,7 @@ const Slider = () => {
           <SwiperSlide key={slide._id}>
             <div className="relative bg-white rounded-xl shadow-md overflow-hidden">
               <img src={slide.medicineImage} alt="Slide" className="w-full h-96 object-cover" />
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
+              <div className="absolute bottom-0 left-0 right-0 bg-stone-100 bg-opacity-50 text-black p-4">
                 <h3 className="text-lg font-bold">{slide.description}</h3>
                 <p className="text-sm mt-1">By: {slide.sellerName} ({slide.sellerEmail})</p>
               </div>
