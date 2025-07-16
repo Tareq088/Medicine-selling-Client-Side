@@ -58,7 +58,7 @@ const SalesReport = () => {
             sheet="users"
             currentTableRef={tableRef.current}
           >
-            <button className="btn btn-primary text-black"> Export excel </button>
+            <button className="btn btn-primary text-black"> Download excel </button>
           </DownloadTableExcel>
         )}
       </div>

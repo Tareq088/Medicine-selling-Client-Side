@@ -20,7 +20,7 @@ const MyOrders = () => {
     },
     enabled: !!user?.email,
   });
-
+console.log(orders)
   return (
     <div className="p-6">
       <ReTitle title="Medion|Payment History"/>

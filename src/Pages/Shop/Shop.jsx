@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaEye } from "react-icons/fa";
-
 import Loading from "../../Components/Loading/Loading";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
@@ -12,14 +11,35 @@ const Shop = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [selectedMedicine, setSelectedMedicine] = useState(null);
+        //sorting
+  const [sortOrder, setSortOrder] = useState("asc");
+const [searchTerm, setSearchTerm] = useState("");
 
-  const { data: medicines = [], isLoading } = useQuery({
-    queryKey: ["allMedicines"],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/medicines");
-      return res.data;
-    },
-  });
+
+  // const { data: medicines = [], isLoading } = useQuery({
+  //   queryKey: ["allMedicines"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get("/medicines");
+  //     return res.data;
+  //   },
+  // });
+              //sorting
+  const { data: medicines = [], isLoading, refetch } = useQuery({
+  queryKey: ["allMedicines", sortOrder, searchTerm, user?.email],
+  queryFn: async () => {
+    const res = await axiosSecure.get(
+      `/medicines?search=${searchTerm}&sort=${sortOrder}`
+    );
+    return res.data;
+  },
+  enabled: !!user?.email,
+});
+useEffect(() => {
+  if (user?.email) {
+    refetch();
+  }
+}, [sortOrder, searchTerm, user?.email, refetch]);
+
 
   const handleAddToCart = async (medicine) => {
     if (!user?.email) {
@@ -51,6 +71,25 @@ const Shop = () => {
     <div className="p-6">
       <ReTitle title="Medion|Shop"/>
       <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Available Medicines</h2>
+      <div className="flex justify-between mb-4">
+  <input
+    type="text"
+    placeholder="Search medicines..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="input input-bordered w-1/2 max-w-xs"
+  />
+
+  <select
+    value={sortOrder}
+    onChange={(e) => setSortOrder(e.target.value)}
+    className="select select-bordered max-w-xs"
+  >
+    <option value="asc">Price: Low to High</option>
+    <option value="desc">Price: High to Low</option>
+  </select>
+</div>
+
       {isLoading ? (
         <Loading></Loading>
       ) : (

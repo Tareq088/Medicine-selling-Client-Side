@@ -1,13 +1,10 @@
-// InvoiceContent.jsx
+// At the very first line
+'use client';
 import React, { forwardRef } from 'react';
-
 const InvoiceContent = forwardRef(({ order, user, payment }, ref) => {
-  // console.log("order", order);
-  // console.log("user", user);
-  // console.log("payment", payment);
-  // console.log("InvoiceContent ref received:", ref);
+  
   return (
-    <div ref={ref} className="bg-white p-8 rounded-xl shadow-lg border">
+    <div className="bg-white p-8 rounded-xl shadow-lg border">
       <div className="flex justify-between items-center mb-6">
         <div className='flex gap-2 items-center'>
           <img src="/logo.jpg" alt="Website Logo" className="h-12" />
@@ -29,7 +26,8 @@ const InvoiceContent = forwardRef(({ order, user, payment }, ref) => {
 
       <div className="mb-6">
         <h3 className="font-bold text-lg mb-2">Purchased Items</h3>
-        <table className="table w-full text-sm">
+        <table ref={ref} className="table w-full text-sm">
+        {/* <table ref={ref}> */}
           <thead>
             <tr>
               <th>Item</th>
