@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-
-import { useState,} from "react";
-
+import { useRef, useState,} from "react";
 import useAxiosSecure from './../../../Hooks/useAxiosSecure';
-import { usePDF } from 'react-to-pdf';
 import { ReTitle } from "re-title";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 
 const SalesReport = () => {
   const axiosSecure = useAxiosSecure();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
+  const tableRef = useRef(null);
+
+
+
 
   const { data: sales = [], refetch, isLoading } = useQuery({
     queryKey: ["salesReport", startDate, endDate],
@@ -48,11 +49,22 @@ const SalesReport = () => {
           Filter
         </button>
 
-     <button className="btn btn-primary text-black" onClick={() => toPDF()}>Download PDF</button>
+       
+                            {/* xls format */}
+                  {/* tableRef.current initially null thake.  */}
+       {tableRef.current && (
+          <DownloadTableExcel
+            filename="Sales Report"
+            sheet="users"
+            currentTableRef={tableRef.current}
+          >
+            <button className="btn btn-primary text-black"> Export excel </button>
+          </DownloadTableExcel>
+        )}
       </div>
 
-      <div ref={targetRef} className="overflow-x-auto bg-white p-4" style={{ backgroundColor: '#ffffff', color: '#000000' }}  >
-        <table className="table">
+      <div  className="overflow-x-auto bg-white p-4" style={{ backgroundColor: '#ffffff', color: '#000000' }}  >
+        <table className="table" ref={tableRef}>
           <thead>
             <tr>
               <th>Medicine</th>
