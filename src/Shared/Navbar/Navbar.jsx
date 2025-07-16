@@ -31,10 +31,16 @@ const Navbar = () => {
           </li>
         </>
       }
-
       <li className="text-lg">
-        <NavLink to="/language" className={({ isActive }) =>isActive ? "underline text-green-600" : ""}>Languages</NavLink>
-      </li>     
+          <select className="select w-full max-w-xs">
+            <option value="" >Select Language</option>
+            <option value="english">English</option>
+            <option value="bangla">Bangla</option>
+            <option value="hindi">Hindi</option>
+            <option value="spanish">Spanish</option>
+            <option value="french">French</option>
+          </select>
+      </li>
     </div>
   );
   const handleLogOut = () => {

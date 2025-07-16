@@ -6,6 +6,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { ReTitle } from "re-title";
+import { convertOffsetToTimes } from "framer-motion";
 
 const Shop = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,25 +16,41 @@ const Shop = () => {
   const [sortOrder, setSortOrder] = useState("asc");
 const [searchTerm, setSearchTerm] = useState("");
 
+                  // ✅ Pagination states
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  // const { data: medicines = [], isLoading } = useQuery({
-  //   queryKey: ["allMedicines"],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get("/medicines");
-  //     return res.data;
-  //   },
-  // });
-              //sorting
-  const { data: medicines = [], isLoading, refetch } = useQuery({
-  queryKey: ["allMedicines", sortOrder, searchTerm, user?.email],
+              //sorting, searchn=ing, data for skip, limit
+  const { data, isLoading, refetch } = useQuery({
+  queryKey: ["allMedicines", currentPage, itemsPerPage, sortOrder, searchTerm],
   queryFn: async () => {
     const res = await axiosSecure.get(
-      `/medicines?search=${searchTerm}&sort=${sortOrder}`
+      `/medicines?page=${currentPage}&size=${itemsPerPage}&search=${searchTerm}&sort=${sortOrder}`
     );
     return res.data;
   },
   enabled: !!user?.email,
 });
+const medicines = data?.medicines || [];
+console.log(medicines)
+          // for pagination
+const totalMedicines = data?.totalMedicines || 0;
+const handleItemsPerPage = (e) => {
+  setItemsPerPage(parseInt(e.target.value));
+  setCurrentPage(0);
+};
+
+const totalPages = Math.ceil(totalMedicines / itemsPerPage);
+const pages = [...Array(totalPages).keys()];
+
+const handlePreviousPage = () => {
+  if (currentPage > 0) {
+    setCurrentPage(currentPage - 1);
+  }
+};
+
+
+
 useEffect(() => {
   if (user?.email) {
     refetch();
@@ -74,10 +91,10 @@ useEffect(() => {
       <div className="flex justify-between mb-4">
   <input
     type="text"
-    placeholder="Search medicines..."
+    placeholder="Search medicines... by Name, Generic Name, Company Name"
     value={searchTerm}
     onChange={(e) => setSearchTerm(e.target.value)}
-    className="input input-bordered w-1/2 max-w-xs"
+    className="input input-bordered w-full max-w-md"
   />
 
   <select
@@ -154,6 +171,43 @@ useEffect(() => {
           </table>
         </div>
       )}
+                   {/* design for pagination */}
+      <div className="pagination flex gap-2 mt-4">
+        <button onClick={handlePreviousPage} className="btn btn-sm">Prev</button>
+
+        {pages.map((page) => (
+          <button
+            className={`btn btn-sm ${currentPage === page ? 'btn-primary' : ''}`}
+            onClick={() => setCurrentPage(page)}
+            key={page}
+          >
+            {page + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => {
+            if (currentPage < pages.length - 1) {
+              setCurrentPage(currentPage + 1);
+            }
+          }}
+          className="btn btn-sm"
+        >
+          Next
+        </button>
+
+        <select
+          value={itemsPerPage}
+          onChange={handleItemsPerPage}
+          className="select select-bordered select-sm ml-2"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+
 
       {/* Modal for details */}
       {selectedMedicine && (
