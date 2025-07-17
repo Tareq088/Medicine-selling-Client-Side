@@ -111,7 +111,7 @@ const AddedMedicineInfo = () => {
               </tr>
             </thead>
             <tbody>
-              {medicines.map((med, i) => (
+              {medicines?.map((med, i) => (
                 <tr key={med._id}>
                   <td>{i + 1}</td>
                   <td>

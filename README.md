@@ -1,12 +1,31 @@
-# React + Vite
+Add a meaningful readme.md file with the name of your website, Admin username, password and live site URL. Include a minimum of 10 bullet points to feature your website.  
+Name of Website: Medion
+Admin UserName: suha@gmail.com
+Admin Password: aA123456$
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Seller UserName:
+Seller Password:
 
-Currently, two official plugins are available:
+Live Link:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+10 bullet Point Features:
+1) It is fully responsive for Mobile, Tablet, Laptop.
+2) It is a role based Website. There is Admin, Seller and normal User.
+3) Here in this Website Pagination is incorporated.
+4) Table to xls is incorporated. So, one can easily change.
+5) Admin can control the user.
+6) Admin can also see the details of payment.
+7) Admin can Manage Category (Add/Update/Delete)
 
-## Expanding the ESLint configuration
+8) One be a Seller easily. Seller can easily add Medicine in website.
+9) A Seller can easily find his/her earning/ paid payment etc..
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+10) User can easily buy any medicine.
+11) An User Can see how much payment he/she has done.
+12) An User can show the discount easily as it is displayed on the Home page.
+
+
+
+
+
+
