@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 
 const axiosSecure = axios.create({
-    baseURL:"http://localhost:3000",
+    // baseURL:"http://localhost:3000",
+    baseURL:"https://medicine-sellling-e-commerce-server.vercel.app",
 })
 const useAxiosSecure = () => {
   const { user, logOut, loading } = useAuth(); // i can get user data using{user}

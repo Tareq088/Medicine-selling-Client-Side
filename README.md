@@ -1,10 +1,14 @@
  
 Name of Website: Medion
+
 Admin UserName: suha@gmail.com
 Admin Password: aA123456$
 
 Seller UserName: trahmanbpdb19@gmail.com
 Seller Password:aA123456$
+
+Seller Id: kopa@gmail.com
+Seller Password: aA123456$
 
 Netlify Link: https://gentle-maamoul-acd09c.netlify.app/
 
