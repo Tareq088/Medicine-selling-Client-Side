@@ -10,9 +10,6 @@ const SalesReport = () => {
   const [endDate, setEndDate] = useState("");
   const tableRef = useRef(null);
 
-
-
-
   const { data: sales = [], refetch, isLoading } = useQuery({
     queryKey: ["salesReport", startDate, endDate],
     queryFn: async () => {

@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import useAxiosSecure from './../../../Hooks/useAxiosSecure';
 import { ReTitle } from "re-title";
+import Loading from "../../../Components/Loading/Loading";
 
 
 const AdminPaymentManagement = () => {
@@ -17,7 +18,7 @@ const AdminPaymentManagement = () => {
       return res.data;
     }
   });
-console.log(payments)
+// console.log(payments)
   // Mutation to accept payment
   const acceptPaymentMutation = useMutation({
     mutationFn: async (orderId) => {
@@ -37,7 +38,7 @@ console.log(payments)
     acceptPaymentMutation.mutate(orderId);
   };
 
-  if (isLoading) return <p>Loading payments...</p>;
+  if (isLoading) return <Loading></Loading>;
 
   return (
     <div className="p-4">

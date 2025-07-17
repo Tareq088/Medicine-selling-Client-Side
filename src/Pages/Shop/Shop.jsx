@@ -31,7 +31,7 @@ const [searchTerm, setSearchTerm] = useState("");
   enabled: !!user?.email,
 });
 const medicines = data?.medicines || [];
-console.log(medicines)
+// console.log(medicines)
           // for pagination
 const totalMedicines = data?.totalMedicines || 0;
 const handleItemsPerPage = (e) => {

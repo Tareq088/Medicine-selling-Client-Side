@@ -32,7 +32,7 @@ const AskForAdvertisement = () => {
         addStatus: "pending",
         createdAt: new Date(),
       };
-      console.log(adData)
+      // console.log(adData)
       const res = await axiosSecure.post("/advertisements", adData);
       return res.data;
     },

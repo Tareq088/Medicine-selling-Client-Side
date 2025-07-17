@@ -17,7 +17,7 @@ const UserPaymentHistory = () => {
     },
     enabled: !!user?.email
   });
-  console.log(payments)
+  // console.log(payments)
   if (isLoading) return <Loading></Loading>;
 
   return (

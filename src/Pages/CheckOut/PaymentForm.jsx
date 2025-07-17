@@ -11,7 +11,7 @@ const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const {orderId} = useParams();
-    console.log(orderId)
+    // console.log(orderId)
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const {user} = useAuth();
@@ -29,10 +29,10 @@ const PaymentForm = () => {
     if (isPending){
         <Loading></Loading>
     }
-    console.log(orderInfo);
+    // console.log(orderInfo);
     const amount = orderInfo.totalAmount;
     const amountInCents = parseFloat(amount)*100;
-    console.log("amountInCents:", amountInCents)
+    // console.log("amountInCents:", amountInCents)
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
@@ -61,7 +61,7 @@ const PaymentForm = () => {
             const res = await axiosSecure.post('/create-payment-intent',{amountInCents,orderId})
                             // server e secret key sothik hoile individual client er jonno ClienSecretKey dibe 
             const clientSecret = res.data.clientSecret;
-            console.log(clientSecret)
+            // console.log(clientSecret)
                         // step:3-- confirm payment
             const result = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
@@ -78,8 +78,8 @@ const PaymentForm = () => {
                 else {
                         setError(" ")
                     if (result.paymentIntent.status === 'succeeded') {
-                        console.log('Payment succeeded!');
-                        console.log(result);
+                        // console.log('Payment succeeded!');
+                        // console.log(result);
                         const transactionId = result.paymentIntent.id;
                                 //step:4- mark parcel paid also create payment history
                                 // const { orderId, amount,userEmail, paymentMethod, transactionId } = req.body;
@@ -91,7 +91,7 @@ const PaymentForm = () => {
                             transactionId:transactionId,
                         }
                         const paymentRes = await axiosSecure.post("/payments",paymentData);
-                        console.log(paymentRes)
+                        // console.log(paymentRes)
                         if(paymentRes.data.insertedId){
                             console.log("payment successfully done...");
                              Swal.fire({

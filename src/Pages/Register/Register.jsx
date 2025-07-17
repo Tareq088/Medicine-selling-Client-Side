@@ -19,10 +19,9 @@ const Register = () => {
     const navigate = useNavigate();
     const from = location.state?.from || '/';
      const handleImageUpload = async(e) => {
-        console.log("image")
         const imageData = e.target.files[0];
         const imageURL = await imagUploadURl(imageData)
-        console.log(imageURL);
+        // console.log(imageURL);
         setProfilePic(imageURL)
     }
 

@@ -12,6 +12,7 @@ const Navbar = () => {
   const { user, logOut } = use(AuthContext);
   const {role, roleLoading} = useUserRole();
 
+
   // console.log(user)
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false)

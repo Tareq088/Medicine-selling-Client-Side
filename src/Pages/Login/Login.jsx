@@ -28,7 +28,7 @@ const Login = () => {
   };
    const handleForgetPassword =() =>{
         const email = getValues("email");
-        console.log(email)
+        // console.log(email)
         resetPassword(email)
         .then(()=>{
             Swal.fire(`Password Reset Mail is sent to  Email: ${email}`);

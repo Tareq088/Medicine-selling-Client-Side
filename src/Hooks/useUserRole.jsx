@@ -9,7 +9,8 @@ const useUserRole = () => {
     const{data:role, isPending, isLoading: roleLoading, refetch} = useQuery({
         queryKey:['role', user?.email],
         queryFn: async() =>{
-            const res = await axiosInstance.get(`/users/role/${user?.email}`);
+            if (!user?.email) return null;  // Guard to prevent undefined fetch
+            const res = await axiosInstance.get(`/users/role/${user.email}`);
             return res.data.role;
         }
     })

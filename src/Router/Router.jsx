@@ -53,20 +53,19 @@ export const router = createBrowserRouter([
       },
       {
         path:"shop",
-        element:<Shop/>
+        element:<UserRoute><Shop/></UserRoute>
       },
       {
         path:"cart",
-        element:<Cart/>
+        element:<UserRoute> <Cart/> </UserRoute>
       },
-     
       {
         path:"/checkOut/:orderId",
-        element:<CheckOut></CheckOut>
+        element: <UserRoute><CheckOut/></UserRoute>
       },
       {
         path:"/invoice/:OrderID",
-        element:<Invoice></Invoice>
+        element:<UserRoute> <Invoice></Invoice> </UserRoute>
       }
     ],
   },
