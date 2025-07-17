@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
@@ -8,18 +8,53 @@ import Loading from "../../../Components/Loading/Loading";
 const AddedMedicineInfo = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth(); // Must provide user.email
-
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("asc"); // 'asc' or 'desc'
 
-  const { data: medicines = [], isLoading } = useQuery({
-    queryKey: ["medicines-email", user?.email, searchTerm, sortOrder],
-    queryFn: async () => {const res = await axiosSecure.get(`/medicines/email?sellerEmail=${user.email}&search=${searchTerm}&sort=${sortOrder}`);
+              // pagination
+   const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
+  // const { data: medicines = [], isLoading } = useQuery({
+  //   queryKey: ["medicines-email", user?.email, searchTerm, sortOrder],
+  //   queryFn: async () => {const res = await axiosSecure.get(`/medicines/email?sellerEmail=${user.email}&search=${searchTerm}&sort=${sortOrder}`);
+  //     return res.data;
+  //   },
+  //   enabled: !!user?.email,
+  // });
+
+   const { data, isLoading, refetch } = useQuery({
+    queryKey: ["medicines-email", user?.email, searchTerm, sortOrder, currentPage, itemsPerPage],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/medicines/email?sellerEmail=${user.email}&search=${searchTerm}&sort=${sortOrder}&page=${currentPage}&size=${itemsPerPage}`
+      );
       return res.data;
     },
     enabled: !!user?.email,
   });
 
+  const medicines = data?.medicines || [];
+  const totalMedicines = data?.totalMedicines || 0;
+  const totalPages = Math.ceil(totalMedicines / itemsPerPage);
+  const pages = [...Array(totalPages).keys()];
+
+  const handleItemsPerPage = (e) => {
+    setItemsPerPage(parseInt(e.target.value));
+    setCurrentPage(0);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  useEffect(() => {
+    if (user?.email) {
+      refetch();
+    }
+  }, [searchTerm, sortOrder, currentPage, itemsPerPage, user?.email, refetch]);
   return (
     <div className="p-5">
       <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">My Added Medicines</h2>
@@ -99,6 +134,43 @@ const AddedMedicineInfo = () => {
           </table>
         </div>
       )}
+      {/* ✅ Pagination Controls */}
+      <div className="pagination flex gap-2 mt-4">
+        <button onClick={handlePreviousPage} className="btn btn-sm">Prev</button>
+
+        {pages.map((page) => (
+          <button
+            key={page}
+            className={`btn btn-sm ${currentPage === page ? 'btn-primary' : ''}`}
+            onClick={() => setCurrentPage(page)}
+          >
+            {page + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => {
+            if (currentPage < totalPages - 1) {
+              setCurrentPage(currentPage + 1);
+            }
+          }}
+          className="btn btn-sm"
+        >
+          Next
+        </button>
+
+        <select
+          value={itemsPerPage}
+          onChange={handleItemsPerPage}
+          className="select select-bordered select-sm ml-2"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+
     </div>
   );
 };

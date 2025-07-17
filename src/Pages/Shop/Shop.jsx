@@ -6,7 +6,6 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { ReTitle } from "re-title";
-import { convertOffsetToTimes } from "framer-motion";
 
 const Shop = () => {
   const axiosSecure = useAxiosSecure();
